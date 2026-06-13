@@ -19,9 +19,9 @@ public abstract class Pergunta implements Validavel {
         this.respostaCorreta = respostaCorreta;
     }
 
-    public int calcularPontuacao(String respostaJogador, int segundosUsados){
+    public int calcularPontuacao(String respostaJogador){
         if(validarResposta(respostaJogador)){
-            return dificuldade.calcularPontuacao(segundosUsados);
+            return dificuldade.calcularPontuacao();
         }
 
         return 0;
@@ -50,7 +50,7 @@ public abstract class Pergunta implements Validavel {
 
     @Override
     public String toString(){
-        return "Área: " + area + "\nSubárea: " + subarea + "\nDificuldade: " + dificuldade.getNome() + "\nPergunta: " + enunciado;
+        return "Área: " + area + "\nSubárea: " + subarea + "\nDificuldade: " + dificuldade.getNome() + "\nTempo Limite: " + dificuldade.getTempoLimiteSegundos() + "\nPergunta: " + enunciado;
     }
 
 }

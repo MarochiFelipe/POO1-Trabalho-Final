@@ -2,17 +2,7 @@ package dificuldade;
 
 public class DificuldadeMedia extends Dificuldade {
     public DificuldadeMedia() {
-        super("Media", 30, 20, 2);
-    }
-
-    @Override
-    protected int calcularBonus(int segundosUsados){
-        if (segundosUsados <= 10){
-            return 5;
-        }
-
-        return 0;
-
+        super("Media", 20, 2, 30);
     }
 
     @Override

@@ -6,16 +6,6 @@ public class DificuldadeDificil extends Dificuldade{
     }
 
     @Override
-    protected int calcularBonus(int segundosUsados){
-        if (segundosUsados <= 7){
-            return 10;
-        }
-
-        return 0;
-
-    }
-
-    @Override
     public String toString(){
         return super.toString() + " || Bônus +10 se responder em até 7 segundos";
     }
