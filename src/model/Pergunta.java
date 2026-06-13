@@ -48,6 +48,9 @@ public abstract class Pergunta implements Validavel {
         return respostaCorreta;
     }
 
+    // O 'throws Exception' genérico aqui permite que as filhas lancem suas exceções específicas
+    public abstract void validarFormatoResposta(String respostaJogador) throws Exception;
+
     @Override
     public String toString(){
         return "Área: " + area + "\nSubárea: " + subarea + "\nDificuldade: " + dificuldade.getNome() + "\nPergunta: " + enunciado;

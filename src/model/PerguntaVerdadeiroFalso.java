@@ -1,6 +1,7 @@
 package model;
 
 import dificuldade.Dificuldade;
+import excecoes.RespostaVFInvalidaException;
 
 public class PerguntaVerdadeiroFalso extends Pergunta{
 
@@ -29,6 +30,22 @@ public class PerguntaVerdadeiroFalso extends Pergunta{
 
         return resposta.toUpperCase();
 
+    }
+
+    @Override
+    public void validarFormatoResposta(String respostaJogador) throws RespostaVFInvalidaException {
+        String resp = respostaJogador.trim().toUpperCase();
+        // Se não for V, F, VERDADEIRO ou FALSO, lança o erro!
+        if (!resp.equals("V") && !resp.equals("F") && !resp.equals("VERDADEIRO") && !resp.equals("FALSO")) {
+            throw new RespostaVFInvalidaException("Resposta inválida! Digite apenas 'V' para Verdadeiro ou 'F' para Falso.");
+        }
+    }@Override
+    public void validarFormatoResposta(String respostaJogador) throws RespostaVFInvalidaException {
+        String resp = respostaJogador.trim().toUpperCase();
+        // Se não for V, F, VERDADEIRO ou FALSO, lança o erro!
+        if (!resp.equals("V") && !resp.equals("F") && !resp.equals("VERDADEIRO") && !resp.equals("FALSO")) {
+            throw new RespostaVFInvalidaException("Resposta inválida! Digite apenas 'V' para Verdadeiro ou 'F' para Falso.");
+        }
     }
 
     @Override
