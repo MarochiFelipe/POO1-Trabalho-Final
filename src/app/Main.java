@@ -1,11 +1,13 @@
 package app;
 
 import excecoes.ArquivoPerguntasException;
+import historico.Historico;
 import model.Jogador;
 import model.Pergunta;
 import modo.ModoJogo;
 import modo.ModoProgressivo;
 import modo.ModoRapido;
+import ranking.Ranking;
 import service.GerenciadorArquivos;
 import service.Quiz;
 
@@ -63,6 +65,7 @@ public class Main {
             }
 
             modoEscolhido = new ModoRapido(dificuldadeRapida);
+
         } else {
             modoEscolhido = new ModoProgressivo();
         }
@@ -78,8 +81,17 @@ public class Main {
             return;
         }
 
-        Quiz quiz = new Quiz(jogador, perguntas, modoEscolhido);
+        Ranking ranking = new Ranking();
+        Historico historico = new Historico();
+
+        gerenciadorArquivos.carregarRanking(ranking);
+        gerenciadorArquivos.carregarHistorico(historico);
+
+        Quiz quiz = new Quiz(jogador, perguntas, modoEscolhido, ranking, historico);
         quiz.iniciar(entrada);
+
+        gerenciadorArquivos.salvarRanking(ranking);
+        gerenciadorArquivos.salvarHistorico(historico);
 
         entrada.close();
     }

@@ -8,9 +8,11 @@ import excecoes.AlternativaInvalidaException;
 import excecoes.ArquivoPerguntasException;
 import excecoes.PerguntaInvalidaException;
 import excecoes.RespostaVFInvalidaException;
+import historico.Historico;
 import model.Pergunta;
 import model.PerguntaMultiplaEscolha;
 import model.PerguntaVerdadeiroFalso;
+import ranking.Ranking;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,6 +22,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GerenciadorArquivos {
 
@@ -206,5 +211,96 @@ public class GerenciadorArquivos {
         }
 
         throw new PerguntaInvalidaException("Dificuldade inválida: " + dificuldadeTexto);
+    }
+
+    public void salvarRanking(Ranking ranking) {
+        salvarMapaRanking("dados/ranking_progressivo.txt", ranking.getRankingProgressivo());
+        salvarMapaRanking("dados/ranking_rapido.txt", ranking.getRankingRapido());
+    }
+
+    public void carregarRanking(Ranking ranking) {
+        ranking.carregarRankingProgressivo(carregarMapaRanking("dados/ranking_progressivo.txt"));
+        ranking.carregarRankingRapido(carregarMapaRanking("dados/ranking_rapido.txt"));
+    }
+
+    private void salvarMapaRanking(String caminhoArquivo, HashMap<String, Integer> mapa) {
+        try {
+            criarPastaDados();
+
+            ArrayList<String> linhas = new ArrayList<>();
+
+            List<Map.Entry<String, Integer>> listaOrdenada = new ArrayList<>(mapa.entrySet());
+            listaOrdenada.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
+
+            for (Map.Entry<String, Integer> entrada : listaOrdenada) {
+                linhas.add(entrada.getKey() + ";" + entrada.getValue());
+            }
+
+            Files.write(Paths.get(caminhoArquivo), linhas, StandardCharsets.UTF_8);
+
+        } catch (IOException erro) {
+            System.out.println("Erro ao salvar ranking: " + erro.getMessage());
+        }
+    }
+
+    private HashMap<String, Integer> carregarMapaRanking(String caminhoArquivo) {
+        HashMap<String, Integer> mapa = new HashMap<>();
+
+        Path caminho = Paths.get(caminhoArquivo);
+
+        if (!Files.exists(caminho)) {
+            return mapa;
+        }
+
+        try {
+            List<String> linhas = Files.readAllLines(caminho, StandardCharsets.UTF_8);
+
+            for (String linha : linhas) {
+                String[] partes = linha.split(";");
+
+                if (partes.length == 2) {
+                    String nome = partes[0].trim();
+                    int pontuacao = Integer.parseInt(partes[1].trim());
+                    mapa.put(nome, pontuacao);
+                }
+            }
+
+        } catch (IOException | NumberFormatException erro) {
+            System.out.println("Erro ao carregar ranking: " + erro.getMessage());
+        }
+
+        return mapa;
+    }
+
+    public void salvarHistorico(Historico historico) {
+        try {
+            criarPastaDados();
+            Files.write(Paths.get("dados/historico.txt"), historico.getRegistros(), StandardCharsets.UTF_8);
+        } catch (IOException erro) {
+            System.out.println("Erro ao salvar histórico: " + erro.getMessage());
+        }
+    }
+
+    public void carregarHistorico(Historico historico) {
+        Path caminho = Paths.get("dados/historico.txt");
+
+        if (!Files.exists(caminho)) {
+            return;
+        }
+
+        try {
+            ArrayList<String> linhas = new ArrayList<>(Files.readAllLines(caminho, StandardCharsets.UTF_8));
+            historico.carregarDados(linhas);
+        } catch (IOException erro) {
+            System.out.println("Erro ao carregar histórico: " + erro.getMessage());
+        }
+    }
+
+    private void criarPastaDados() throws IOException {
+        Path pasta = Paths.get("dados");
+
+        if (!Files.exists(pasta)) {
+            Files.createDirectories(pasta);
+        }
     }
 }

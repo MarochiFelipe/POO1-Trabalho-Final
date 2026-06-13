@@ -1,11 +1,13 @@
 package service;
 
 import dificuldade.Dificuldade;
+import historico.Historico;
 import model.Jogador;
 import model.Pergunta;
 import modo.ModoJogo;
 import modo.ModoProgressivo;
 import modo.ModoRapido;
+import ranking.Ranking;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,13 +21,19 @@ public class Quiz {
     private ModoJogo modoJogo;
     private Dificuldade dificuldadeAtual;
     private HashSet<Pergunta> perguntasUsadas;
+    private Ranking ranking;
+    private Historico historico;
 
-    public Quiz(Jogador jogador, ArrayList<Pergunta> perguntas, ModoJogo modoJogo) {
+    public Quiz(Jogador jogador, ArrayList<Pergunta> perguntas, ModoJogo modoJogo,
+                Ranking ranking, Historico historico) {
+
         this.jogador = jogador;
         this.perguntas = perguntas;
         this.modoJogo = modoJogo;
         this.dificuldadeAtual = modoJogo.escolherDificuldadeInicial();
         this.perguntasUsadas = new HashSet<>();
+        this.ranking = ranking;
+        this.historico = historico;
     }
 
     public void iniciar(Scanner entrada) {
@@ -75,21 +83,15 @@ public class Quiz {
             String resposta = "";
             boolean formatoValido = false;
 
-            // Esse laço prende o jogador aqui até ele digitar algo correto (A,B,C,D ou V,F)
             while (!formatoValido) {
                 System.out.print("Digite sua resposta: ");
                 resposta = entrada.nextLine();
 
                 try {
-                    // O quiz pede para a pergunta checar o formato.
-                    // Se estiver errado, ela dispara a exceção e o código pula direto para o 'catch'
                     pergunta.validarFormatoResposta(resposta);
-
-                    // Se o formato for válido, o código chega nesta linha e libera o laço
                     formatoValido = true;
-                } catch (Exception e) {
-                    // Mostra a mensagem amigável que criamos lá na Exception (ex: "Digite apenas A, B, C ou D")
-                    System.out.println("⚠️ " + e.getMessage());
+                } catch (Exception erro) {
+                    System.out.println("⚠️ " + erro.getMessage());
                 }
             }
 
@@ -101,6 +103,7 @@ public class Quiz {
             if (passouDoTempo) {
                 System.out.println();
                 System.out.println("Tempo esgotado! Você respondeu em " + tempoUsado + " segundos.");
+
                 aplicarErroProgressivo(pergunta, modoProgressivo, true);
 
                 acertosSeguidos = 0;
@@ -154,8 +157,7 @@ public class Quiz {
             }
         }
 
-        ranking.adicionarJogador(jogador, modoJogo);
-        mostrarResultadoFinal();
+        finalizarPartida();
     }
 
     private void aplicarErroProgressivo(Pergunta pergunta, ModoProgressivo modoProgressivo, boolean erroPorTempo) {
@@ -223,21 +225,15 @@ public class Quiz {
             String resposta = "";
             boolean formatoValido = false;
 
-            // Esse laço prende o jogador aqui até ele digitar algo correto (A,B,C,D ou V,F)
             while (!formatoValido) {
                 System.out.print("Digite sua resposta: ");
                 resposta = entrada.nextLine();
 
                 try {
-                    // O quiz pede para a pergunta checar o formato.
-                    // Se estiver errado, ela dispara a exceção e o código pula direto para o 'catch'
                     pergunta.validarFormatoResposta(resposta);
-
-                    // Se o formato for válido, o código chega nesta linha e libera o laço
                     formatoValido = true;
-                } catch (Exception e) {
-                    // Mostra a mensagem amigável que criamos lá na Exception (ex: "Digite apenas A, B, C ou D")
-                    System.out.println("⚠️ " + e.getMessage());
+                } catch (Exception erro) {
+                    System.out.println("⚠️ " + erro.getMessage());
                 }
             }
 
@@ -279,8 +275,7 @@ public class Quiz {
         System.out.println("Bônus por rapidez: +" + bonusRapidez);
         System.out.println("Pontuação final: " + jogador.getPontuacao());
 
-        ranking.adicionarJogador(jogador, modoJogo);
-        mostrarResultadoFinal();
+        finalizarPartida();
     }
 
     private int calcularBonusRapidez(int acertos, long tempoTotalSegundos) {
@@ -363,6 +358,12 @@ public class Quiz {
         }
 
         return dificuldade;
+    }
+
+    private void finalizarPartida() {
+        ranking.adicionarJogador(jogador, modoJogo);
+        historico.adicionarPartida(jogador, modoJogo);
+        mostrarResultadoFinal();
     }
 
     private void mostrarResultadoFinal() {

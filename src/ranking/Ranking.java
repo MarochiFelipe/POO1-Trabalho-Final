@@ -12,7 +12,6 @@ import java.util.Map;
 
 public class Ranking {
 
-    // Dois HashMaps separados para cumprir o requisito e dividir os modos
     private HashMap<String, Integer> rankingProgressivo;
     private HashMap<String, Integer> rankingRapido;
 
@@ -21,40 +20,42 @@ public class Ranking {
         this.rankingRapido = new HashMap<>();
     }
 
-    /**
-     * Adiciona o jogador no ranking correto baseado no modo de jogo jogado.
-     */
     public void adicionarJogador(Jogador jogador, ModoJogo modo) {
         if (modo instanceof ModoProgressivo) {
-            rankingProgressivo.put(jogador.getNome(), jogador.getPontuacao());
+            adicionarMelhorPontuacao(rankingProgressivo, jogador.getNome(), jogador.getPontuacao());
         } else if (modo instanceof ModoRapido) {
-            rankingRapido.put(jogador.getNome(), jogador.getPontuacao());
+            adicionarMelhorPontuacao(rankingRapido, jogador.getNome(), jogador.getPontuacao());
         }
     }
 
-    /**
-     * Exibe o ranking do Modo Progressivo ordenado por pontuação.
-     */
+    private void adicionarMelhorPontuacao(HashMap<String, Integer> ranking, String nome, int pontuacao) {
+        if (!ranking.containsKey(nome)) {
+            ranking.put(nome, pontuacao);
+        } else {
+            int pontuacaoAntiga = ranking.get(nome);
+
+            if (pontuacao > pontuacaoAntiga) {
+                ranking.put(nome, pontuacao);
+            }
+        }
+    }
+
     public void exibirRankingProgressivo() {
-        System.out.println("\n=================================");
-        System.out.println("    RANKING - MODO PROGRESSIVO   ");
+        System.out.println();
+        System.out.println("=================================");
+        System.out.println("    RANKING - MODO PROGRESSIVO");
         System.out.println("=================================");
         exibirMapaOrdenado(rankingProgressivo);
     }
 
-    /**
-     * Exibe o ranking do Modo Rápido ordenado por pontuação.
-     */
     public void exibirRankingRapido() {
-        System.out.println("\n=================================");
-        System.out.println("       RANKING - MODO RÁPIDO     ");
+        System.out.println();
+        System.out.println("=================================");
+        System.out.println("       RANKING - MODO RÁPIDO");
         System.out.println("=================================");
         exibirMapaOrdenado(rankingRapido);
     }
 
-    /**
-     * Método privado utilitário que reutiliza a lógica de ordenação para ambos os mapas.
-     */
     private void exibirMapaOrdenado(HashMap<String, Integer> mapa) {
         if (mapa.isEmpty()) {
             System.out.println("O ranking deste modo ainda está vazio.");
@@ -62,22 +63,18 @@ public class Ranking {
             return;
         }
 
-        // 1. Converte o HashMap em uma lista para podermos ordenar
         List<Map.Entry<String, Integer>> listaOrdenada = new ArrayList<>(mapa.entrySet());
-
-        // 2. Ordena de forma decrescente (maior pontuação primeiro)
         listaOrdenada.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
 
-        // 3. Imprime formatado
         int posicao = 1;
+
         for (Map.Entry<String, Integer> entrada : listaOrdenada) {
             System.out.println(posicao + "º Lugar: " + entrada.getKey() + " - " + entrada.getValue() + " pontos");
             posicao++;
         }
+
         System.out.println("=================================");
     }
-
-    // --- MÉTODOS DE PONTE PARA O GERENCIADOR DE ARQUIVOS ---
 
     public HashMap<String, Integer> getRankingProgressivo() {
         return rankingProgressivo;
