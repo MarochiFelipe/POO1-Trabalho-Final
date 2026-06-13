@@ -1,9 +1,15 @@
 package app;
 
-import dificuldade.Dificuldade;
 import dificuldade.DificuldadeFacil;
+import dificuldade.DificuldadeMedia;
 import model.Jogador;
+import model.Pergunta;
 import model.PerguntaMultiplaEscolha;
+import model.PerguntaVerdadeiroFalso;
+import modo.ModoJogo;
+import modo.ModoProgressivo;
+import modo.ModoRapido;
+import service.Quiz;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,7 +21,7 @@ public class Main {
         Scanner entrada = new Scanner(System.in);
 
         System.out.println("=================================");
-        System.out.println("          QUIZ TESTE");
+        System.out.println("        QUIZ DO CONHECIMENTO");
         System.out.println("=================================");
 
         System.out.print("Digite seu nome: ");
@@ -23,60 +29,79 @@ public class Main {
 
         Jogador jogador = new Jogador(nome);
 
-        Dificuldade dificuldade = new DificuldadeFacil();
+        System.out.println();
+        System.out.println("Escolha o modo de jogo:");
+        System.out.println("1 - Modo Progressivo");
+        System.out.println("2 - Modo Rápido");
+        System.out.print("Opção: ");
 
-        ArrayList<String> alternativas = new ArrayList<>();
-        alternativas.add("A) Acidez ou alcalinidade do solo");
-        alternativas.add("B) Quantidade de areia no solo");
-        alternativas.add("C) Cor do solo");
-        alternativas.add("D) Profundidade do solo");
+        int opcao = lerInteiro(entrada);
+        entrada.nextLine();
 
-        PerguntaMultiplaEscolha pergunta = new PerguntaMultiplaEscolha(
+        ModoJogo modoEscolhido;
+
+        if (opcao == 2) {
+            modoEscolhido = new ModoRapido();
+        } else {
+            modoEscolhido = new ModoProgressivo();
+        }
+
+        ArrayList<Pergunta> perguntas = new ArrayList<>();
+
+        ArrayList<String> alternativas1 = new ArrayList<>();
+        alternativas1.add("A) Acidez ou alcalinidade do solo");
+        alternativas1.add("B) Quantidade de areia no solo");
+        alternativas1.add("C) Cor do solo");
+        alternativas1.add("D) Profundidade do solo");
+
+        PerguntaMultiplaEscolha pergunta1 = new PerguntaMultiplaEscolha(
                 "O que o pH do solo indica?",
                 "Agronomia",
                 "Solos",
-                dificuldade,
+                new DificuldadeFacil(),
                 "A",
-                alternativas
+                alternativas1
         );
 
-        System.out.println();
-        System.out.println(pergunta);
+        PerguntaVerdadeiroFalso pergunta2 = new PerguntaVerdadeiroFalso(
+                "O solo pode ter diferentes níveis de acidez.",
+                "Agronomia",
+                "Solos",
+                new DificuldadeFacil(),
+                "V"
+        );
 
-        System.out.print("Digite sua resposta: ");
-        String resposta = entrada.nextLine();
+        ArrayList<String> alternativas3 = new ArrayList<>();
+        alternativas3.add("A) Java");
+        alternativas3.add("B) HTML");
+        alternativas3.add("C) CSS");
+        alternativas3.add("D) SQL");
 
-        System.out.print("Quantos segundos você demorou para responder? ");
-        int segundosUsados = entrada.nextInt();
+        PerguntaMultiplaEscolha pergunta3 = new PerguntaMultiplaEscolha(
+                "Qual dessas opções é uma linguagem de programação orientada a objetos?",
+                "Tecnologia",
+                "Programação",
+                new DificuldadeMedia(),
+                "A",
+                alternativas3
+        );
 
-        int pontos = pergunta.calcularPontuacao(resposta, segundosUsados);
+        perguntas.add(pergunta1);
+        perguntas.add(pergunta2);
+        perguntas.add(pergunta3);
 
-        if (pontos > 0) {
-            jogador.adicionarPontuacao(pontos);
-            jogador.registrarAcerto(pergunta.getEnunciado());
-
-            System.out.println();
-            System.out.println("Resposta correta!");
-            System.out.println("Você ganhou " + pontos + " pontos.");
-        } else {
-            jogador.registrarErro(pergunta.getEnunciado());
-
-            System.out.println();
-            System.out.println("Resposta errada!");
-            System.out.println("Resposta correta: " + pergunta.getRespostaCorreta());
-        }
-
-        System.out.println();
-        System.out.println("===== RESULTADO DO JOGADOR =====");
-        System.out.println(jogador);
-
-        System.out.println();
-        System.out.println("===== HISTÓRICO =====");
-
-        for (String registro : jogador.getHistoricoRespostas()) {
-            System.out.println(registro);
-        }
+        Quiz quiz = new Quiz(jogador, perguntas, modoEscolhido);
+        quiz.iniciar(entrada);
 
         entrada.close();
+    }
+
+    private static int lerInteiro(Scanner entrada) {
+        while (!entrada.hasNextInt()) {
+            System.out.print("Digite apenas números: ");
+            entrada.next();
+        }
+
+        return entrada.nextInt();
     }
 }
