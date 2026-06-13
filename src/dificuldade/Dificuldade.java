@@ -2,30 +2,23 @@ package dificuldade;
 
 public abstract class Dificuldade {
     private String nome;
-    private int tempoPorPergunta;
     private int pontosPorAcerto;
     private int nivel;
+    private int tempoLimiteSegundos;
 
-    public Dificuldade(String nome, int tempoPorPergunta, int pontosPorAcerto, int nivel) {
+    public Dificuldade(String nome, int pontosPorAcerto, int nivel, int tempoLimiteSegundos) {
         this.nome = nome;
-        this.tempoPorPergunta = tempoPorPergunta;
         this.pontosPorAcerto = pontosPorAcerto;
         this.nivel = nivel;
+        this.tempoLimiteSegundos = tempoLimiteSegundos;
     }
 
-    public int calcularPontuacao(int segundosUsados){
-        int bonus = calcularBonus(segundosUsados);
-        return bonus + pontosPorAcerto;
+    public int calcularPontuacao() {
+        return pontosPorAcerto;
     }
-
-    protected abstract int calcularBonus(int segundosUsados);
 
     public String getNome() {
         return nome;
-    }
-
-    public int getTempoPorPergunta() {
-        return tempoPorPergunta;
     }
 
     public int getPontosPorAcerto() {
@@ -36,8 +29,12 @@ public abstract class Dificuldade {
         return nivel;
     }
 
+    public int getTempoLimiteSegundos() {
+        return tempoLimiteSegundos;
+    }
+
     @Override
     public String toString() {
-        return "Dificuldade: " + nome + " || Tempo por pergunta: " + tempoPorPergunta + " segundos" + " || Pontos por acerto: " +  pontosPorAcerto;
+        return "Dificuldade: " + nome + " | Pontos por acerto: " + pontosPorAcerto + " | Tempo limite: " + tempoLimiteSegundos + " segundos";
     }
 }

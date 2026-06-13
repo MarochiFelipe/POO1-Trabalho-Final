@@ -22,6 +22,15 @@ public class Jogador {
         this.pontuacao += pontos;
     }
 
+    public void perderPontuacao(int pontos){
+        this.pontuacao -= pontos;
+
+        if (this.pontuacao < 0){
+            this.pontuacao = 0;
+        }
+
+    }
+
     public void registrarAcerto(String pergunta){
         acertos++;
         historicoRespostas.add("Acertou: " + pergunta);

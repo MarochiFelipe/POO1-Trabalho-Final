@@ -1,10 +1,11 @@
 package service;
 
 import dificuldade.Dificuldade;
-import dificuldade.DificuldadeFacil;
 import model.Jogador;
 import model.Pergunta;
 import modo.ModoJogo;
+import modo.ModoProgressivo;
+import modo.ModoRapido;
 
 import java.util.ArrayList;
 import java.util.Scanner;

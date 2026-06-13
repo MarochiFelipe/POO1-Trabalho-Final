@@ -14,10 +14,6 @@ public abstract class ModoJogo {
 
     public abstract Dificuldade escolherDificuldadeInicial();
 
-    public abstract Dificuldade atualizarDificuldade(Dificuldade dificuldadeAtual, int acertosSeguidos, int errosSeguidos);
-
-    public abstract int getTempoTotalDoModo();
-
     public String getNome() {
         return nome;
     }
