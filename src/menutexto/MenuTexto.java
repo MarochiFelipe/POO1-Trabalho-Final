@@ -178,7 +178,7 @@ public class MenuTexto {
         System.out.println("- As perguntas são sorteadas aleatoriamente.");
         System.out.println("- O jogador responde perguntas até errar.");
         System.out.println("- A partida termina no primeiro erro.");
-        System.out.println("- O limite é de 12 perguntas.");
+        System.out.println("- O limite é de 5 perguntas.");
         System.out.println("- Não existe tempo por pergunta.");
         System.out.println("- O tempo total da partida é contado.");
         System.out.println("- Quanto mais rápido responder, maior pode ser o bônus final.");
