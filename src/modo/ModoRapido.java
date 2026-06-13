@@ -11,10 +11,9 @@ public class ModoRapido extends ModoJogo {
     private int limitePerguntas;
 
     public ModoRapido(String dificuldadeEscolhida) {
-        super("Modo Rápido", "O jogador escolhe uma dificuldade e responde até errar uma pergunta.");
-
+        super("Modo Rápido");
         this.dificuldadeEscolhida = dificuldadeEscolhida;
-        this.limitePerguntas = 12;
+        this.limitePerguntas = 5;
     }
 
     @Override
@@ -44,10 +43,5 @@ public class ModoRapido extends ModoJogo {
 
     public boolean isAleatorio() {
         return dificuldadeEscolhida.equalsIgnoreCase("aleatorio");
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + "\nDificuldade escolhida: " + dificuldadeEscolhida + "\nLimite de perguntas: " + limitePerguntas;
     }
 }

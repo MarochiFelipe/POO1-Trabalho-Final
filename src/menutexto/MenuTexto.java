@@ -12,8 +12,6 @@ import service.GerenciadorArquivos;
 import service.Quiz;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class MenuTexto {
@@ -103,18 +101,7 @@ public class MenuTexto {
             return;
         }
 
-        String areaEscolhida = escolherArea(perguntas);
-        String subareaEscolhida = escolherSubarea(perguntas, areaEscolhida);
-
-        ArrayList<Pergunta> perguntasFiltradas = filtrarPerguntas(perguntas, areaEscolhida, subareaEscolhida);
-
-        if (perguntasFiltradas.isEmpty()) {
-            System.out.println("Não existem perguntas disponíveis para essa área e subárea.");
-            pausar();
-            return;
-        }
-
-        Quiz quiz = new Quiz(jogador, perguntasFiltradas, modoEscolhido, ranking, historico);
+        Quiz quiz = new Quiz(jogador, perguntas, modoEscolhido, ranking, historico);
         quiz.iniciar(entrada);
 
         gerenciadorArquivos.salvarRanking(ranking);
@@ -164,113 +151,6 @@ public class MenuTexto {
         }
     }
 
-    private String escolherArea(ArrayList<Pergunta> perguntas) {
-        ArrayList<String> areas = listarAreas(perguntas);
-
-        System.out.println();
-        System.out.println("Escolha uma área do conhecimento:");
-        System.out.println("0 - Todas as áreas");
-
-        for (int i = 0; i < areas.size(); i++) {
-            System.out.println((i + 1) + " - " + areas.get(i));
-        }
-
-        System.out.print("Opção: ");
-        int opcao = lerInteiro();
-        entrada.nextLine();
-
-        if (opcao == 0) {
-            return "TODAS";
-        }
-
-        if (opcao >= 1 && opcao <= areas.size()) {
-            return areas.get(opcao - 1);
-        }
-
-        System.out.println("Opção inválida. Todas as áreas serão usadas.");
-        return "TODAS";
-    }
-
-    private String escolherSubarea(ArrayList<Pergunta> perguntas, String areaEscolhida) {
-        if (areaEscolhida.equalsIgnoreCase("TODAS")) {
-            return "TODAS";
-        }
-
-        ArrayList<String> subareas = listarSubareas(perguntas, areaEscolhida);
-
-        System.out.println();
-        System.out.println("Escolha uma subárea:");
-        System.out.println("0 - Todas as subáreas");
-
-        for (int i = 0; i < subareas.size(); i++) {
-            System.out.println((i + 1) + " - " + subareas.get(i));
-        }
-
-        System.out.print("Opção: ");
-        int opcao = lerInteiro();
-        entrada.nextLine();
-
-        if (opcao == 0) {
-            return "TODAS";
-        }
-
-        if (opcao >= 1 && opcao <= subareas.size()) {
-            return subareas.get(opcao - 1);
-        }
-
-        System.out.println("Opção inválida. Todas as subáreas serão usadas.");
-        return "TODAS";
-    }
-
-    private ArrayList<String> listarAreas(ArrayList<Pergunta> perguntas) {
-        HashSet<String> conjuntoAreas = new HashSet<>();
-
-        for (Pergunta pergunta : perguntas) {
-            conjuntoAreas.add(pergunta.getArea());
-        }
-
-        ArrayList<String> areas = new ArrayList<>(conjuntoAreas);
-        Collections.sort(areas);
-
-        return areas;
-    }
-
-    private ArrayList<String> listarSubareas(ArrayList<Pergunta> perguntas, String areaEscolhida) {
-        HashSet<String> conjuntoSubareas = new HashSet<>();
-
-        for (Pergunta pergunta : perguntas) {
-            if (pergunta.getArea().equalsIgnoreCase(areaEscolhida)) {
-                conjuntoSubareas.add(pergunta.getSubarea());
-            }
-        }
-
-        ArrayList<String> subareas = new ArrayList<>(conjuntoSubareas);
-        Collections.sort(subareas);
-
-        return subareas;
-    }
-
-    private ArrayList<Pergunta> filtrarPerguntas(ArrayList<Pergunta> perguntas,
-                                                 String areaEscolhida,
-                                                 String subareaEscolhida) {
-
-        ArrayList<Pergunta> perguntasFiltradas = new ArrayList<>();
-
-        for (Pergunta pergunta : perguntas) {
-            boolean areaCorreta = areaEscolhida.equalsIgnoreCase("TODAS") ||
-                    pergunta.getArea().equalsIgnoreCase(areaEscolhida);
-
-            boolean subareaCorreta = subareaEscolhida.equalsIgnoreCase("TODAS") ||
-                    pergunta.getSubarea().equalsIgnoreCase(subareaEscolhida);
-
-            if (areaCorreta && subareaCorreta) {
-                perguntasFiltradas.add(pergunta);
-            }
-        }
-
-        return perguntasFiltradas;
-    }
-
     private void exibirRegras() {
         System.out.println();
         System.out.println("=================================");
@@ -280,6 +160,7 @@ public class MenuTexto {
         System.out.println();
         System.out.println("MODO PROGRESSIVO:");
         System.out.println("- O jogador começa na dificuldade Fácil.");
+        System.out.println("- As perguntas são sorteadas aleatoriamente.");
         System.out.println("- Cada acerto soma pontos de acordo com a dificuldade.");
         System.out.println("- Após 3 acertos seguidos, o jogador passa a ganhar bônus de sequência.");
         System.out.println("- Se errar, o bônus é perdido.");
@@ -294,6 +175,7 @@ public class MenuTexto {
         System.out.println();
         System.out.println("MODO RÁPIDO:");
         System.out.println("- O jogador escolhe uma dificuldade: Fácil, Média, Difícil ou Aleatória.");
+        System.out.println("- As perguntas são sorteadas aleatoriamente.");
         System.out.println("- O jogador responde perguntas até errar.");
         System.out.println("- A partida termina no primeiro erro.");
         System.out.println("- O limite é de 12 perguntas.");
@@ -301,12 +183,6 @@ public class MenuTexto {
         System.out.println("- O tempo total da partida é contado.");
         System.out.println("- Quanto mais rápido responder, maior pode ser o bônus final.");
         System.out.println("- Nenhuma pergunta se repete durante a partida.");
-
-        System.out.println();
-        System.out.println("ÁREAS E SUBÁREAS:");
-        System.out.println("- Antes da partida, o jogador pode escolher uma área do conhecimento.");
-        System.out.println("- Depois, pode escolher uma subárea específica.");
-        System.out.println("- Também é possível jogar com todas as áreas e subáreas.");
 
         System.out.println();
         System.out.println("PONTUAÇÃO:");
