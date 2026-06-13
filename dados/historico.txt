@@ -1,0 +1,3 @@
+Jogador: Maria | Modo: Modo progressivo | Pontuação: 60 | Acertos: 6 | Erros: 3
+Jogador: maria | Modo: Modo Rápido | Pontuação: 149 | Acertos: 4 | Erros: 1
+Jogador: maria | Modo: Modo Rápido | Pontuação: 220 | Acertos: 2 | Erros: 1

@@ -214,18 +214,19 @@ public class GerenciadorArquivos {
     }
 
     public void salvarRanking(Ranking ranking) {
-        salvarMapaRanking("dados/ranking_progressivo.txt", ranking.getRankingProgressivo());
-        salvarMapaRanking("dados/ranking_rapido.txt", ranking.getRankingRapido());
+        salvarMapaRanking("ranking_progressivo.txt", ranking.getRankingProgressivo());
+        salvarMapaRanking("ranking_rapido.txt", ranking.getRankingRapido());
     }
 
     public void carregarRanking(Ranking ranking) {
-        ranking.carregarRankingProgressivo(carregarMapaRanking("dados/ranking_progressivo.txt"));
-        ranking.carregarRankingRapido(carregarMapaRanking("dados/ranking_rapido.txt"));
+        ranking.carregarRankingProgressivo(carregarMapaRanking("ranking_progressivo.txt"));
+        ranking.carregarRankingRapido(carregarMapaRanking("ranking_rapido.txt"));
     }
 
-    private void salvarMapaRanking(String caminhoArquivo, HashMap<String, Integer> mapa) {
+    private void salvarMapaRanking(String nomeArquivo, HashMap<String, Integer> mapa) {
         try {
-            criarPastaDados();
+            Path pastaDados = criarPastaDados();
+            Path caminhoArquivo = pastaDados.resolve(nomeArquivo);
 
             ArrayList<String> linhas = new ArrayList<>();
 
@@ -236,17 +237,19 @@ public class GerenciadorArquivos {
                 linhas.add(entrada.getKey() + ";" + entrada.getValue());
             }
 
-            Files.write(Paths.get(caminhoArquivo), linhas, StandardCharsets.UTF_8);
+            Files.write(caminhoArquivo, linhas, StandardCharsets.UTF_8);
+
+            System.out.println("Arquivo salvo em: " + caminhoArquivo.toAbsolutePath());
 
         } catch (IOException erro) {
             System.out.println("Erro ao salvar ranking: " + erro.getMessage());
         }
     }
 
-    private HashMap<String, Integer> carregarMapaRanking(String caminhoArquivo) {
+    private HashMap<String, Integer> carregarMapaRanking(String nomeArquivo) {
         HashMap<String, Integer> mapa = new HashMap<>();
 
-        Path caminho = Paths.get(caminhoArquivo);
+        Path caminho = obterPastaDados().resolve(nomeArquivo);
 
         if (!Files.exists(caminho)) {
             return mapa;
@@ -274,15 +277,20 @@ public class GerenciadorArquivos {
 
     public void salvarHistorico(Historico historico) {
         try {
-            criarPastaDados();
-            Files.write(Paths.get("dados/historico.txt"), historico.getRegistros(), StandardCharsets.UTF_8);
+            Path pastaDados = criarPastaDados();
+            Path caminhoArquivo = pastaDados.resolve("historico.txt");
+
+            Files.write(caminhoArquivo, historico.getRegistros(), StandardCharsets.UTF_8);
+
+            System.out.println("Arquivo salvo em: " + caminhoArquivo.toAbsolutePath());
+
         } catch (IOException erro) {
             System.out.println("Erro ao salvar histórico: " + erro.getMessage());
         }
     }
 
     public void carregarHistorico(Historico historico) {
-        Path caminho = Paths.get("dados/historico.txt");
+        Path caminho = obterPastaDados().resolve("historico.txt");
 
         if (!Files.exists(caminho)) {
             return;
@@ -296,11 +304,23 @@ public class GerenciadorArquivos {
         }
     }
 
-    private void criarPastaDados() throws IOException {
-        Path pasta = Paths.get("dados");
+    private Path criarPastaDados() throws IOException {
+        Path pasta = obterPastaDados();
 
         if (!Files.exists(pasta)) {
             Files.createDirectories(pasta);
         }
+
+        return pasta;
+    }
+
+    private Path obterPastaDados() {
+        Path pastaDoProjetoInterno = Paths.get("POO1-Trabalho-Final", "dados");
+
+        if (Files.exists(Paths.get("POO1-Trabalho-Final"))) {
+            return pastaDoProjetoInterno;
+        }
+
+        return Paths.get("dados");
     }
 }
