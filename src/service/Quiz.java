@@ -72,8 +72,26 @@ public class Quiz {
 
             long inicioPergunta = System.currentTimeMillis();
 
-            System.out.print("Digite sua resposta: ");
-            String resposta = entrada.nextLine();
+            String resposta = "";
+            boolean formatoValido = false;
+
+            // Esse laço prende o jogador aqui até ele digitar algo correto (A,B,C,D ou V,F)
+            while (!formatoValido) {
+                System.out.print("Digite sua resposta: ");
+                resposta = entrada.nextLine();
+
+                try {
+                    // O quiz pede para a pergunta checar o formato.
+                    // Se estiver errado, ela dispara a exceção e o código pula direto para o 'catch'
+                    pergunta.validarFormatoResposta(resposta);
+
+                    // Se o formato for válido, o código chega nesta linha e libera o laço
+                    formatoValido = true;
+                } catch (Exception e) {
+                    // Mostra a mensagem amigável que criamos lá na Exception (ex: "Digite apenas A, B, C ou D")
+                    System.out.println("⚠️ " + e.getMessage());
+                }
+            }
 
             long fimPergunta = System.currentTimeMillis();
             long tempoUsado = (fimPergunta - inicioPergunta) / 1000;
@@ -201,8 +219,26 @@ public class Quiz {
             System.out.println("---------------------------------");
             System.out.println(pergunta);
 
-            System.out.print("Digite sua resposta: ");
-            String resposta = entrada.nextLine();
+            String resposta = "";
+            boolean formatoValido = false;
+
+            // Esse laço prende o jogador aqui até ele digitar algo correto (A,B,C,D ou V,F)
+            while (!formatoValido) {
+                System.out.print("Digite sua resposta: ");
+                resposta = entrada.nextLine();
+
+                try {
+                    // O quiz pede para a pergunta checar o formato.
+                    // Se estiver errado, ela dispara a exceção e o código pula direto para o 'catch'
+                    pergunta.validarFormatoResposta(resposta);
+
+                    // Se o formato for válido, o código chega nesta linha e libera o laço
+                    formatoValido = true;
+                } catch (Exception e) {
+                    // Mostra a mensagem amigável que criamos lá na Exception (ex: "Digite apenas A, B, C ou D")
+                    System.out.println("⚠️ " + e.getMessage());
+                }
+            }
 
             if (pergunta.validarResposta(resposta)) {
                 int pontos = pergunta.calcularPontuacao(resposta);
