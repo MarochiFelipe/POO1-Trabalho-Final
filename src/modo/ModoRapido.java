@@ -1,48 +1,48 @@
 package modo;
 
 import dificuldade.Dificuldade;
+import dificuldade.DificuldadeDificil;
 import dificuldade.DificuldadeFacil;
 import dificuldade.DificuldadeMedia;
-import dificuldade.DificuldadeDificil;
 
-public class ModoRapido extends ModoJogo{
+public class ModoRapido extends ModoJogo {
 
     private String dificuldadeEscolhida;
     private int limitePerguntas;
 
-    public ModoRapido(){
+    public ModoRapido(String dificuldadeEscolhida) {
         super("Modo Rápido", "O jogador escolhe uma dificuldade e responde até errar uma pergunta.");
+
         this.dificuldadeEscolhida = dificuldadeEscolhida;
-        this.limitePerguntas = 5;
+        this.limitePerguntas = 12;
     }
 
     @Override
-    public Dificuldade escolherDificuldadeInicial(){
-        if(dificuldadeEscolhida.equalsIgnoreCase("facil")){
+    public Dificuldade escolherDificuldadeInicial() {
+        if (dificuldadeEscolhida.equalsIgnoreCase("facil")) {
             return new DificuldadeFacil();
         }
 
-        if (dificuldadeEscolhida.equalsIgnoreCase("media")){
+        if (dificuldadeEscolhida.equalsIgnoreCase("media")) {
             return new DificuldadeMedia();
         }
 
-        if (dificuldadeEscolhida.equalsIgnoreCase("dificil")){
+        if (dificuldadeEscolhida.equalsIgnoreCase("dificil")) {
             return new DificuldadeDificil();
         }
 
         return new DificuldadeFacil();
-
     }
 
-    public String getDificuldadeEscolhida(){
+    public String getDificuldadeEscolhida() {
         return dificuldadeEscolhida;
     }
 
-    public int getLimitePerguntas(){
+    public int getLimitePerguntas() {
         return limitePerguntas;
     }
 
-    public boolean isAleatorio(){
+    public boolean isAleatorio() {
         return dificuldadeEscolhida.equalsIgnoreCase("aleatorio");
     }
 
@@ -50,5 +50,4 @@ public class ModoRapido extends ModoJogo{
     public String toString() {
         return super.toString() + "\nDificuldade escolhida: " + dificuldadeEscolhida + "\nLimite de perguntas: " + limitePerguntas;
     }
-
 }

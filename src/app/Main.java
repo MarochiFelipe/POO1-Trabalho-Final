@@ -1,16 +1,12 @@
 package app;
 
-import dificuldade.DificuldadeFacil;
-import dificuldade.DificuldadeMedia;
 import model.Jogador;
 import model.Pergunta;
-import model.PerguntaMultiplaEscolha;
-import model.PerguntaVerdadeiroFalso;
 import modo.ModoJogo;
 import modo.ModoProgressivo;
 import modo.ModoRapido;
-import service.Quiz;
 import service.BancoPerguntas;
+import service.Quiz;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -36,13 +32,37 @@ public class Main {
         System.out.println("2 - Modo Rápido");
         System.out.print("Opção: ");
 
-        int opcao = lerInteiro(entrada);
+        int opcaoModo = lerInteiro(entrada);
         entrada.nextLine();
 
         ModoJogo modoEscolhido;
 
-        if (opcao == 2) {
-            modoEscolhido = new ModoRapido();
+        if (opcaoModo == 2) {
+            System.out.println();
+            System.out.println("Escolha a dificuldade do Modo Rápido:");
+            System.out.println("1 - Fácil");
+            System.out.println("2 - Média");
+            System.out.println("3 - Difícil");
+            System.out.println("4 - Aleatório");
+            System.out.print("Opção: ");
+
+            int opcaoDificuldade = lerInteiro(entrada);
+            entrada.nextLine();
+
+            String dificuldadeRapida;
+
+            if (opcaoDificuldade == 1) {
+                dificuldadeRapida = "facil";
+            } else if (opcaoDificuldade == 2) {
+                dificuldadeRapida = "media";
+            } else if (opcaoDificuldade == 3) {
+                dificuldadeRapida = "dificil";
+            } else {
+                dificuldadeRapida = "aleatorio";
+            }
+
+            modoEscolhido = new ModoRapido(dificuldadeRapida);
+
         } else {
             modoEscolhido = new ModoProgressivo();
         }
