@@ -1,0 +1,77 @@
+MULTIPLA;Biologia;Genética;FACIL;O DNA está relacionado principalmente a qual função?;A) Digestão|B) Hereditariedade|C) Respiração|D) Locomoção;B
+MULTIPLA;Biologia;Genética;MEDIA;Qual estrutura celular guarda o material genético em células eucariontes?;A) Núcleo|B) Ribossomo|C) Lisossomo|D) Parede celular;A
+VF;Biologia;Genética;DIFICIL;Mutação é qualquer alteração no material genético de um organismo.;;V
+MULTIPLA;Biologia;Genética;FACIL;Os genes são formados por qual molécula?;A) Glicose|B) Água|C) DNA|D) Amido;C
+MULTIPLA;Biologia;Genética;DIFICIL;O cruzamento entre dois indivíduos heterozigotos Aa pode gerar qual proporção genotípica?;A) 1 AA, 2 Aa, 1 aa|B) 3 AA, 1 aa|C) 2 AA, 2 aa|D) 4 Aa;A
+VF;Biologia;Ecologia;FACIL;Ecologia estuda as relações dos seres vivos entre si e com o ambiente.;;V
+MULTIPLA;Biologia;Ecologia;MEDIA;Qual termo representa o conjunto de populações de diferentes espécies em uma área?;A) Organismo|B) Comunidade|C) Tecido|D) Célula;B
+MULTIPLA;Biologia;Ecologia;DIFICIL;Em uma cadeia alimentar, os decompositores atuam principalmente em qual processo?;A) Produção de luz|B) Reciclagem da matéria orgânica|C) Formação de gametas|D) Fotossíntese direta;B
+MULTIPLA;Biologia;Ecologia;FACIL;Qual destes seres geralmente é produtor em uma cadeia alimentar?;A) Planta|B) Leão|C) Cobra|D) Fungo;A
+VF;Biologia;Ecologia;MEDIA;A biodiversidade pode contribuir para o equilíbrio dos ecossistemas.;;V
+MULTIPLA;Matemática;Álgebra;FACIL;Quanto é 7 + 8?;A) 13|B) 14|C) 15|D) 16;C
+MULTIPLA;Matemática;Álgebra;MEDIA;Se x + 5 = 12, qual é o valor de x?;A) 5|B) 6|C) 7|D) 8;C
+MULTIPLA;Matemática;Álgebra;DIFICIL;Qual é o resultado de 2x + 3x?;A) 5x|B) 6x|C) x²|D) 5;A
+VF;Matemática;Álgebra;FACIL;Em uma equação, a incógnita representa um valor desconhecido.;;V
+MULTIPLA;Matemática;Álgebra;DIFICIL;Se 3x = 21, qual é o valor de x?;A) 6|B) 7|C) 8|D) 9;B
+MULTIPLA;Matemática;Geometria;FACIL;Qual figura possui três lados?;A) Quadrado|B) Triângulo|C) Círculo|D) Pentágono;B
+MULTIPLA;Matemática;Geometria;MEDIA;Qual é a fórmula da área do retângulo?;A) base x altura|B) lado x lado x lado|C) π x r²|D) 2 x π x r;A
+MULTIPLA;Matemática;Geometria;DIFICIL;Qual é a fórmula da área do círculo?;A) π x r²|B) base x altura|C) lado x lado|D) 2 x π x r;A
+VF;Matemática;Geometria;MEDIA;A soma dos ângulos internos de um triângulo é 180 graus.;;V
+MULTIPLA;Matemática;Geometria;DIFICIL;Um quadrado de lado 5 possui área igual a quanto?;A) 10|B) 20|C) 25|D) 30;C
+MULTIPLA;Química;Tabela Periódica;FACIL;Qual símbolo representa o oxigênio?;A) O|B) Ox|C) Og|D) Os;A
+MULTIPLA;Química;Tabela Periódica;MEDIA;Qual elemento químico possui símbolo Na?;A) Nitrogênio|B) Sódio|C) Níquel|D) Neônio;B
+VF;Química;Tabela Periódica;DIFICIL;Os elementos da tabela periódica são organizados pelo número atômico.;;V
+MULTIPLA;Química;Tabela Periódica;FACIL;Qual símbolo representa o hidrogênio?;A) H|B) He|C) Hg|D) Ho;A
+MULTIPLA;Química;Tabela Periódica;DIFICIL;Os gases nobres ficam principalmente em qual grupo da tabela periódica?;A) 1|B) 2|C) 17|D) 18;D
+MULTIPLA;Química;Soluções;FACIL;Uma solução é formada por soluto e o quê?;A) Solvente|B) Energia|C) Areia|D) Metal;A
+MULTIPLA;Química;Soluções;MEDIA;Uma solução com pH menor que 7 é considerada o quê?;A) Básica|B) Neutra|C) Ácida|D) Salina;C
+VF;Química;Soluções;MEDIA;Água pura em condições comuns possui pH próximo de 7.;;V
+MULTIPLA;Química;Soluções;DIFICIL;Quando há muito soluto dissolvido em uma solução, ela pode ser chamada de quê?;A) Diluída|B) Concentrada|C) Gasosa|D) Impossível;B
+MULTIPLA;Química;Soluções;DIFICIL;Qual processo separa componentes pela diferença de ponto de ebulição?;A) Filtração|B) Destilação|C) Decantação|D) Peneiração;B
+MULTIPLA;Física;Mecânica;FACIL;Qual grandeza mede a mudança de posição de um corpo?;A) Temperatura|B) Movimento|C) Massa|D) Cor;B
+MULTIPLA;Física;Mecânica;MEDIA;Qual é a unidade de força no Sistema Internacional?;A) Joule|B) Newton|C) Watt|D) Pascal;B
+VF;Física;Mecânica;DIFICIL;A aceleração representa a variação da velocidade em relação ao tempo.;;V
+MULTIPLA;Física;Mecânica;FACIL;Qual objeto tende a cair pela ação da gravidade?;A) Pedra solta no ar|B) Luz|C) Som|D) Pensamento;A
+MULTIPLA;Física;Mecânica;DIFICIL;Na fórmula F = m x a, o que representa a letra a?;A) Área|B) Aceleração|C) Altura|D) Atrito;B
+MULTIPLA;Física;Eletricidade;FACIL;Qual aparelho é usado para iluminar ambientes?;A) Lâmpada|B) Termômetro|C) Régua|D) Bússola;A
+MULTIPLA;Física;Eletricidade;MEDIA;Qual grandeza é medida em volts?;A) Corrente elétrica|B) Tensão elétrica|C) Resistência|D) Massa;B
+MULTIPLA;Física;Eletricidade;DIFICIL;Na Lei de Ohm, qual fórmula relaciona tensão, resistência e corrente?;A) V = R x I|B) F = m x a|C) P = m x g|D) E = m x c²;A
+VF;Física;Eletricidade;MEDIA;Materiais condutores permitem a passagem de corrente elétrica com mais facilidade.;;V
+MULTIPLA;Física;Eletricidade;DIFICIL;Qual material costuma ser bom condutor elétrico?;A) Borracha|B) Plástico|C) Cobre|D) Madeira seca;C
+MULTIPLA;Geografia;Climatologia;FACIL;O clima está relacionado principalmente a quê?;A) Condições atmosféricas de longo prazo|B) Apenas um dia de chuva|C) Cor do solo|D) Tipo de roupa;A
+MULTIPLA;Geografia;Climatologia;MEDIA;Qual fator pode influenciar o clima de uma região?;A) Latitude|B) Número de ruas|C) Nome da cidade|D) Idioma local;A
+VF;Geografia;Climatologia;DIFICIL;Altitude pode influenciar a temperatura de uma região.;;V
+MULTIPLA;Geografia;Climatologia;FACIL;Chuva, vento e temperatura são elementos ligados a qual área?;A) Climatologia|B) Literatura|C) Geometria|D) Música;A
+MULTIPLA;Geografia;Climatologia;DIFICIL;O fenômeno El Niño está relacionado principalmente a alterações em qual oceano?;A) Atlântico Norte|B) Pacífico Equatorial|C) Índico Sul|D) Ártico;B
+MULTIPLA;Geografia;Cartografia;FACIL;Mapas são usados principalmente para representar o quê?;A) Espaços geográficos|B) Receitas culinárias|C) Músicas|D) Reações químicas;A
+MULTIPLA;Geografia;Cartografia;MEDIA;O que indica a escala de um mapa?;A) Relação entre distância no mapa e distância real|B) Cor dos países|C) Nome dos rios|D) Altura das montanhas apenas;A
+VF;Geografia;Cartografia;MEDIA;A rosa dos ventos ajuda na orientação espacial.;;V
+MULTIPLA;Geografia;Cartografia;DIFICIL;Linhas de latitude são medidas em relação a qual linha principal?;A) Meridiano de Greenwich|B) Linha do Equador|C) Trópico de Capricórnio|D) Círculo Polar Ártico;B
+MULTIPLA;Geografia;Cartografia;DIFICIL;O meridiano de Greenwich é referência para qual coordenada?;A) Latitude|B) Longitude|C) Altitude|D) Escala;B
+MULTIPLA;Artes;História da Arte;FACIL;Qual artista pintou a Mona Lisa?;A) Leonardo da Vinci|B) Van Gogh|C) Picasso|D) Michelangelo;A
+MULTIPLA;Artes;História da Arte;MEDIA;O Renascimento valorizou principalmente qual aspecto?;A) Humanismo e razão|B) Apenas arte abstrata|C) Cinema digital|D) Música eletrônica;A
+VF;Artes;História da Arte;DIFICIL;O Impressionismo valorizava a impressão visual e efeitos de luz.;;V
+MULTIPLA;Artes;História da Arte;FACIL;Pintura, escultura e arquitetura são exemplos de quê?;A) Artes visuais|B) Esportes|C) Cálculos|D) Reações químicas;A
+MULTIPLA;Artes;História da Arte;DIFICIL;Van Gogh é associado principalmente a qual área artística?;A) Pintura|B) Dança clássica|C) Teatro grego|D) Cinema mudo;A
+MULTIPLA;Artes;Música;FACIL;Qual instrumento possui teclas brancas e pretas?;A) Piano|B) Violino|C) Tambor|D) Flauta;A
+MULTIPLA;Artes;Música;MEDIA;Qual elemento musical indica a velocidade da música?;A) Tempo|B) Cor|C) Perspectiva|D) Textura do papel;A
+VF;Artes;Música;MEDIA;Ritmo está relacionado à organização dos sons no tempo.;;V
+MULTIPLA;Artes;Música;DIFICIL;Na música, o conjunto de notas tocadas simultaneamente forma o quê?;A) Acorde|B) Escala térmica|C) Fotograma|D) Perspectiva;A
+MULTIPLA;Artes;Música;DIFICIL;Qual destes é um compositor clássico famoso?;A) Beethoven|B) Darwin|C) Newton|D) Einstein;A
+MULTIPLA;Entretenimento e Cultura;Cinema e Séries;FACIL;Filmes são exibidos principalmente em qual formato artístico?;A) Audiovisual|B) Botânico|C) Geométrico|D) Químico;A
+MULTIPLA;Entretenimento e Cultura;Cinema e Séries;MEDIA;Quem geralmente dirige a produção artística de um filme?;A) Diretor|B) Espectador|C) Bilheteiro|D) Tradutor;A
+VF;Entretenimento e Cultura;Cinema e Séries;DIFICIL;Roteiro é o texto que orienta falas, cenas e ações de uma produção audiovisual.;;V
+MULTIPLA;Entretenimento e Cultura;Cinema e Séries;FACIL;Uma série normalmente é dividida em quê?;A) Episódios|B) Capítulos químicos|C) Fórmulas|D) Mapas;A
+MULTIPLA;Entretenimento e Cultura;Cinema e Séries;DIFICIL;Qual termo é usado para a sequência de cenas editadas em uma obra audiovisual?;A) Montagem|B) Fotossíntese|C) Equação|D) Latitude;A
+MULTIPLA;Entretenimento e Cultura;Cultura Geral;FACIL;Qual destes é um meio de comunicação?;A) Rádio|B) Cadeira|C) Pedra|D) Garfo;A
+MULTIPLA;Entretenimento e Cultura;Cultura Geral;MEDIA;Festas, comidas típicas e danças podem fazer parte de quê?;A) Cultura de um povo|B) Apenas matemática|C) Apenas eletricidade|D) Apenas genética;A
+VF;Entretenimento e Cultura;Cultura Geral;MEDIA;A cultura pode mudar ao longo do tempo.;;V
+MULTIPLA;Entretenimento e Cultura;Cultura Geral;DIFICIL;O termo patrimônio cultural pode se referir a bens materiais e o quê?;A) Imateriais|B) Invisíveis no sentido físico apenas|C) Elétricos somente|D) Genéticos somente;A
+MULTIPLA;Entretenimento e Cultura;Cultura Geral;DIFICIL;Literatura, música, culinária e festas populares são manifestações de quê?;A) Cultura|B) Gravidade|C) Solução química|D) Cartografia;A
+MULTIPLA;Biologia;Genética;MEDIA;Qual cientista é conhecido pelos estudos com ervilhas e hereditariedade?;A) Mendel|B) Newton|C) Lavoisier|D) Picasso;A
+MULTIPLA;Matemática;Álgebra;MEDIA;Quanto é 5²?;A) 10|B) 15|C) 20|D) 25;D
+MULTIPLA;Química;Soluções;FACIL;Misturar açúcar em água forma principalmente uma solução do tipo quê?;A) Líquida|B) Sólida pura|C) Gasosa explosiva|D) Metálica;A
+VF;Física;Mecânica;FACIL;A gravidade da Terra atrai objetos para o centro do planeta.;;V
+MULTIPLA;Geografia;Cartografia;MEDIA;Qual instrumento pode ajudar na orientação pelos pontos cardeais?;A) Bússola|B) Microscópio|C) Termômetro clínico|D) Calculadora;A
+MULTIPLA;Artes;Música;FACIL;Qual destes é um instrumento de cordas?;A) Violão|B) Tambor|C) Flauta|D) Prato;A
+MULTIPLA;Entretenimento e Cultura;Cinema e Séries;MEDIA;O responsável por interpretar um personagem é chamado de quê?;A) Ator|B) Químico|C) Cartógrafo|D) Geneticista;A

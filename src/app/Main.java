@@ -1,11 +1,12 @@
 package app;
 
+import excecoes.ArquivoPerguntasException;
 import model.Jogador;
 import model.Pergunta;
 import modo.ModoJogo;
 import modo.ModoProgressivo;
 import modo.ModoRapido;
-import service.BancoPerguntas;
+import service.GerenciadorArquivos;
 import service.Quiz;
 
 import java.util.ArrayList;
@@ -62,13 +63,20 @@ public class Main {
             }
 
             modoEscolhido = new ModoRapido(dificuldadeRapida);
-
         } else {
             modoEscolhido = new ModoProgressivo();
         }
 
-        BancoPerguntas bancoPerguntas = new BancoPerguntas();
-        ArrayList<Pergunta> perguntas = bancoPerguntas.criarPerguntas();
+        GerenciadorArquivos gerenciadorArquivos = new GerenciadorArquivos();
+        ArrayList<Pergunta> perguntas;
+
+        try {
+            perguntas = gerenciadorArquivos.carregarPerguntas();
+        } catch (ArquivoPerguntasException erro) {
+            System.out.println("Erro ao carregar perguntas: " + erro.getMessage());
+            entrada.close();
+            return;
+        }
 
         Quiz quiz = new Quiz(jogador, perguntas, modoEscolhido);
         quiz.iniciar(entrada);
