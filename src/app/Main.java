@@ -10,6 +10,7 @@ import modo.ModoJogo;
 import modo.ModoProgressivo;
 import modo.ModoRapido;
 import service.Quiz;
+import service.BancoPerguntas;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -46,49 +47,8 @@ public class Main {
             modoEscolhido = new ModoProgressivo();
         }
 
-        ArrayList<Pergunta> perguntas = new ArrayList<>();
-
-        ArrayList<String> alternativas1 = new ArrayList<>();
-        alternativas1.add("A) Acidez ou alcalinidade do solo");
-        alternativas1.add("B) Quantidade de areia no solo");
-        alternativas1.add("C) Cor do solo");
-        alternativas1.add("D) Profundidade do solo");
-
-        PerguntaMultiplaEscolha pergunta1 = new PerguntaMultiplaEscolha(
-                "O que o pH do solo indica?",
-                "Agronomia",
-                "Solos",
-                new DificuldadeFacil(),
-                "A",
-                alternativas1
-        );
-
-        PerguntaVerdadeiroFalso pergunta2 = new PerguntaVerdadeiroFalso(
-                "O solo pode ter diferentes níveis de acidez.",
-                "Agronomia",
-                "Solos",
-                new DificuldadeFacil(),
-                "V"
-        );
-
-        ArrayList<String> alternativas3 = new ArrayList<>();
-        alternativas3.add("A) Java");
-        alternativas3.add("B) HTML");
-        alternativas3.add("C) CSS");
-        alternativas3.add("D) SQL");
-
-        PerguntaMultiplaEscolha pergunta3 = new PerguntaMultiplaEscolha(
-                "Qual dessas opções é uma linguagem de programação orientada a objetos?",
-                "Tecnologia",
-                "Programação",
-                new DificuldadeMedia(),
-                "A",
-                alternativas3
-        );
-
-        perguntas.add(pergunta1);
-        perguntas.add(pergunta2);
-        perguntas.add(pergunta3);
+        BancoPerguntas bancoPerguntas = new BancoPerguntas();
+        ArrayList<Pergunta> perguntas = bancoPerguntas.criarPerguntas();
 
         Quiz quiz = new Quiz(jogador, perguntas, modoEscolhido);
         quiz.iniciar(entrada);

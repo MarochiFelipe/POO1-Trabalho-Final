@@ -45,9 +45,19 @@ public class Quiz {
             return;
         }
 
+        ArrayList<Pergunta> perguntasUsadas = new ArrayList<>();
         int numeroPergunta = 1;
 
-        for (Pergunta pergunta : perguntas){
+       while (perguntasUsadas.size() < perguntas.size()){
+
+           Pergunta pergunta = buscarPerguntaPorDificuldade(perguntasUsadas);
+
+           if(pergunta == null){
+               break;
+           }
+
+           perguntasUsadas.add(pergunta);
+
             System.out.println();
             System.out.println("---------------------------------");
             System.out.println("Pergunta " + numeroPergunta + " de " + perguntas.size());
@@ -137,6 +147,29 @@ public class Quiz {
         }
 
         return entrada.nextInt();
+
+    }
+
+    private Pergunta buscarPerguntaPorDificuldade(ArrayList<Pergunta> perguntasUsadas){
+
+        for (Pergunta pergunta : perguntas){
+            boolean mesmaDificuldade = pergunta.getDificuldade().getNome().equalsIgnoreCase(dificuldadeAtual.getNome());
+
+            boolean aindaNaoUsada = !perguntasUsadas.contains(pergunta);
+
+            if(mesmaDificuldade && aindaNaoUsada){
+                return pergunta;
+            }
+
+        }
+
+        for (Pergunta pergunta : perguntas) {
+            if (!perguntasUsadas.contains(pergunta)) {
+                return pergunta;
+            }
+        }
+
+        return null;
 
     }
 
