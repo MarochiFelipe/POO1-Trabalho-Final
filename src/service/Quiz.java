@@ -51,7 +51,52 @@ public class Quiz {
 
        while (perguntasUsadas.size() < perguntas.size()){
 
-           Pergunta pergunta = buscarPerguntaPorDificuldade(perguntasUsadas);
+    private void aplicarErroProgressivo(Pergunta pergunta, ModoProgressivo modoProgressivo, boolean erroPorTempo) {
+        jogador.registrarErro(pergunta.getEnunciado());
+
+        int pontosPerdidos;
+
+        if (erroPorTempo) {
+            pontosPerdidos = modoProgressivo.getPunicaoTempo();
+        } else {
+            pontosPerdidos = modoProgressivo.getPunicaoErro();
+        }
+
+        jogador.perderPontuacao(pontosPerdidos);
+        modoProgressivo.perderVida();
+
+        Dificuldade novaDificuldade = modoProgressivo.descerDificuldade(dificuldadeAtual);
+
+        if (!novaDificuldade.getNome().equalsIgnoreCase(dificuldadeAtual.getNome())) {
+            dificuldadeAtual = novaDificuldade;
+            System.out.println("Você desceu para a dificuldade: " + dificuldadeAtual.getNome());
+        } else {
+            System.out.println("Você continua na dificuldade: " + dificuldadeAtual.getNome());
+        }
+
+        System.out.println("Punição: -" + pontosPerdidos + " pontos");
+        System.out.println("Vidas restantes: " + modoProgressivo.getQuantidadeVidas());
+    }
+
+    private void iniciarModoRapido(Scanner entrada) {
+        ModoRapido modoRapido = (ModoRapido) modoJogo;
+
+        int acertosModoRapido = 0;
+        boolean partidaAtiva = true;
+
+        System.out.println();
+        System.out.println("=================================");
+        System.out.println("          MODO RÁPIDO");
+        System.out.println("=================================");
+        System.out.println("Dificuldade escolhida: " + modoRapido.getDificuldadeEscolhida());
+        System.out.println("A partida termina no primeiro erro.");
+        System.out.println("Limite de perguntas: " + modoRapido.getLimitePerguntas());
+
+        long inicioPartida = System.currentTimeMillis();
+
+        while (partidaAtiva && perguntasUsadas.size() < modoRapido.getLimitePerguntas()) {
+
+            Pergunta pergunta = buscarPerguntaModoRapido(modoRapido);
 
            if(pergunta == null){
                break;
