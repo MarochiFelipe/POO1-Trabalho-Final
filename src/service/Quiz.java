@@ -154,6 +154,7 @@ public class Quiz {
             }
         }
 
+        ranking.adicionarJogador(jogador, modoJogo);
         mostrarResultadoFinal();
     }
 
@@ -278,6 +279,7 @@ public class Quiz {
         System.out.println("Bônus por rapidez: +" + bonusRapidez);
         System.out.println("Pontuação final: " + jogador.getPontuacao());
 
+        ranking.adicionarJogador(jogador, modoJogo);
         mostrarResultadoFinal();
     }
 
