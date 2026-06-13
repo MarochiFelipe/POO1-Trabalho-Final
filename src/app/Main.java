@@ -1,10 +1,11 @@
 package app;
 
 import dificuldade.Dificuldade;
-import modo.ModoJogo;
-import modo.ModoProgressivo;
-import modo.ModoRapido;
+import dificuldade.DificuldadeFacil;
+import model.Jogador;
+import model.PerguntaMultiplaEscolha;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -14,100 +15,68 @@ public class Main {
         Scanner entrada = new Scanner(System.in);
 
         System.out.println("=================================");
-        System.out.println("       TESTE DO QUIZ");
+        System.out.println("          QUIZ TESTE");
         System.out.println("=================================");
 
-        System.out.println("Escolha o modo de jogo:");
-        System.out.println("1 - Modo Progressivo");
-        System.out.println("2 - Modo Rápido");
-        System.out.print("Opção: ");
+        System.out.print("Digite seu nome: ");
+        String nome = entrada.nextLine();
 
-        int opcao = lerInteiro(entrada);
+        Jogador jogador = new Jogador(nome);
 
-        ModoJogo modoEscolhido;
+        Dificuldade dificuldade = new DificuldadeFacil();
 
-        if (opcao == 2) {
-            modoEscolhido = new ModoRapido();
-        } else {
-            modoEscolhido = new ModoProgressivo();
-        }
+        ArrayList<String> alternativas = new ArrayList<>();
+        alternativas.add("A) Acidez ou alcalinidade do solo");
+        alternativas.add("B) Quantidade de areia no solo");
+        alternativas.add("C) Cor do solo");
+        alternativas.add("D) Profundidade do solo");
 
-        Dificuldade dificuldadeAtual = modoEscolhido.escolherDificuldadeInicial();
-
-        int pontuacaoTotal = 0;
-        int acertosSeguidos = 0;
-        int errosSeguidos = 0;
-
-        System.out.println();
-        System.out.println("Modo escolhido:");
-        System.out.println(modoEscolhido);
+        PerguntaMultiplaEscolha pergunta = new PerguntaMultiplaEscolha(
+                "O que o pH do solo indica?",
+                "Agronomia",
+                "Solos",
+                dificuldade,
+                "A",
+                alternativas
+        );
 
         System.out.println();
-        System.out.println("Dificuldade inicial:");
-        System.out.println(dificuldadeAtual);
+        System.out.println(pergunta);
 
-        for (int rodada = 1; rodada <= 5; rodada++) {
+        System.out.print("Digite sua resposta: ");
+        String resposta = entrada.nextLine();
+
+        System.out.print("Quantos segundos você demorou para responder? ");
+        int segundosUsados = entrada.nextInt();
+
+        int pontos = pergunta.calcularPontuacao(resposta, segundosUsados);
+
+        if (pontos > 0) {
+            jogador.adicionarPontuacao(pontos);
+            jogador.registrarAcerto(pergunta.getEnunciado());
 
             System.out.println();
-            System.out.println("---------------------------------");
-            System.out.println("Rodada " + rodada);
-            System.out.println(dificuldadeAtual);
+            System.out.println("Resposta correta!");
+            System.out.println("Você ganhou " + pontos + " pontos.");
+        } else {
+            jogador.registrarErro(pergunta.getEnunciado());
 
-            System.out.print("O jogador acertou? Digite 1 para SIM ou 0 para NÃO: ");
-            int acertou = lerInteiro(entrada);
-
-            if (acertou == 1) {
-                System.out.print("Quantos segundos o jogador demorou para responder? ");
-                int segundosUsados = lerInteiro(entrada);
-
-                int pontosGanhos = dificuldadeAtual.calcularPontuacao(segundosUsados);
-
-                pontuacaoTotal += pontosGanhos;
-                acertosSeguidos++;
-                errosSeguidos = 0;
-
-                System.out.println("Resposta correta!");
-                System.out.println("Pontos ganhos: " + pontosGanhos);
-
-            } else {
-                errosSeguidos++;
-                acertosSeguidos = 0;
-
-                System.out.println("Resposta errada!");
-                System.out.println("Nenhum ponto foi somado.");
-            }
-
-            Dificuldade novaDificuldade = modoEscolhido.atualizarDificuldade(
-                    dificuldadeAtual,
-                    acertosSeguidos,
-                    errosSeguidos
-            );
-
-            if (!novaDificuldade.getNome().equals(dificuldadeAtual.getNome())) {
-                System.out.println("A dificuldade mudou para:");
-                System.out.println(novaDificuldade);
-            }
-
-            dificuldadeAtual = novaDificuldade;
-
-            System.out.println("Pontuação atual: " + pontuacaoTotal);
+            System.out.println();
+            System.out.println("Resposta errada!");
+            System.out.println("Resposta correta: " + pergunta.getRespostaCorreta());
         }
 
         System.out.println();
-        System.out.println("=================================");
-        System.out.println("Fim do teste!");
-        System.out.println("Pontuação final: " + pontuacaoTotal);
-        System.out.println("=================================");
+        System.out.println("===== RESULTADO DO JOGADOR =====");
+        System.out.println(jogador);
 
-        entrada.close();
-    }
+        System.out.println();
+        System.out.println("===== HISTÓRICO =====");
 
-    private static int lerInteiro(Scanner entrada) {
-        while (!entrada.hasNextInt()) {
-            System.out.print("Digite apenas números: ");
-            entrada.next();
+        for (String registro : jogador.getHistoricoRespostas()) {
+            System.out.println(registro);
         }
 
-        return entrada.nextInt();
+        entrada.close();
     }
 }
