@@ -1,6 +1,5 @@
 package menutexto;
 
-import excecoes.ArquivoPerguntasException;
 import historico.Historico;
 import model.Jogador;
 import model.Pergunta;
@@ -8,6 +7,7 @@ import modo.ModoJogo;
 import modo.ModoProgressivo;
 import modo.ModoRapido;
 import ranking.Ranking;
+import service.BancoPerguntas;
 import service.GerenciadorArquivos;
 import service.Quiz;
 
@@ -20,14 +20,16 @@ public class MenuTexto {
     private GerenciadorArquivos gerenciadorArquivos;
     private Ranking ranking;
     private Historico historico;
+    private BancoPerguntas bancoPerguntas;
 
     public MenuTexto(Scanner entrada, GerenciadorArquivos gerenciadorArquivos,
-                     Ranking ranking, Historico historico) {
+                     Ranking ranking, Historico historico, BancoPerguntas bancoPerguntas) {
 
         this.entrada = entrada;
         this.gerenciadorArquivos = gerenciadorArquivos;
         this.ranking = ranking;
         this.historico = historico;
+        this.bancoPerguntas = bancoPerguntas;
     }
 
     public void iniciar() {
@@ -93,13 +95,18 @@ public class MenuTexto {
 
         ArrayList<Pergunta> perguntas;
 
-        try {
+        /*try {
             perguntas = gerenciadorArquivos.carregarPerguntas();
         } catch (ArquivoPerguntasException erro) {
             System.out.println("Erro ao carregar perguntas: " + erro.getMessage());
             pausar();
             return;
         }
+        */
+
+
+
+        perguntas = bancoPerguntas.criarPerguntas();
 
         Quiz quiz = new Quiz(jogador, perguntas, modoEscolhido, ranking, historico);
         quiz.iniciar(entrada);

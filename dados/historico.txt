@@ -2,3 +2,6 @@ Jogador: Maria | Modo: Modo progressivo | Pontuação: 60 | Acertos: 6 | Erros: 
 Jogador: maria | Modo: Modo Rápido | Pontuação: 149 | Acertos: 4 | Erros: 1
 Jogador: maria | Modo: Modo Rápido | Pontuação: 220 | Acertos: 2 | Erros: 1
 Jogador: Teste | Modo: Modo progressivo | Pontuação: 95 | Acertos: 9 | Erros: 3
+Jogador: Felipe | Modo: Modo Progressivo | Pontuação: 60 | Acertos: 5 | Erros: 2
+Jogador: Felipe | Modo: Modo Progressivo | Pontuação: 20 | Acertos: 3 | Erros: 1
+Jogador: Felipe | Modo: Modo Progressivo | Pontuação: 20 | Acertos: 3 | Erros: 2
